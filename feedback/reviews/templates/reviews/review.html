@@ -1,18 +1,22 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Your Review</title>
+    <link rel="stylesheet" href="{% static "reviews/styles.css" %}">
 </head>
 <body>
 <!--Creating a form :-->
   <form action= "/"method="POST"><!--      How and where the form is submitted-->
       {% csrf_token %}<!--      IMPORTANT TO GENERATE THE TOKEN FOR PROTECTION ANTI-DUPLICATION !!! -->
-      {% if has_error%}<!--      Validating the data-->
-        <p>This form is invalid - Please enter a valid username !</p>
-      {% endif %}
-    <label for="username">Your Name</label>
-    <input id="username" name="username" type="text">
+      {% for field in form %}
+        <div class="form-control {% if field.errors %}errors{% endif %}">
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
+      {% endfor %}
     <button>Send</button>
   </form>
 </body>
