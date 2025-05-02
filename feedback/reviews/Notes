@@ -21,3 +21,5 @@ And then we have the class based views which can replace the view functions. The
 With that you can inherit from the generic View to have class where you define get() and post() methods and possible other HTTP as well and the Django will automaticaly call the correct method for you depending on what kind of request is reaching that view.
 You still point at that view in our ulrs.py like this : path("", views.ReviewView.as_view())
     But then if the same url is reached with different HTTP methods, the different methods in your view will be called and you don't have to add the "if" check in your view function to find out wether it's a post() or get() request.
+
+
