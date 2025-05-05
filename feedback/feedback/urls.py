@@ -16,9 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("reviews.urls")),
     path("profiles/", include("profiles.urls"))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) :
+# first argument - settings.MEDIA_URL -> this is the URL which should be used when exposing the files
+# second argument - document_root=settings.MEDIA_ROOT -> this is the path to the folder that contains the files that should be exposed
+# This static function exposes all the files stored in our MEDIA_ROOT through the MEDIA_URL to the outside world.
